@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="pdf.css" />
     <script src="pdf.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 
 </head>
 
@@ -21,43 +24,44 @@
             </div>
             <div class="col-md-12" >
                 <div id="allvoice">
-                    <div class='txcenter tx12bold'><span id='header_key1'>HỢP ĐỒNG HẠN MỨC TÍN DỤNG</span></div>
-                    <div class='txcenter'><span id='header_key2'>Số: </span><span id='headerValue_numberHD'>[…]</span></div>
-                    <div><span id="header_key3" class='tx12'>Hôm nay, ngày </span> <span id="headerValue_dateHD">[…]</span><span
-                            id="header_key4">tháng</span> <span id='headerValue_monthHD'></span> <span id='header_key5'>năm</span> <span
-                            id='headerValue_yearHD'>[…]</span>, <span id='header_key6'>tại</span> <span id='headerValue_atPlace'>[…]</span><span id="header_key7">, chúng tôi gồm có:</span></div>
-                    <div class='tx12bold'><span id='benA_key1'>BÊN CẤP TÍN DỤNG: NGÂN HÀNG TMCP ĐẠI CHÚNG VIỆT NAM - </span><span
-                            id='benAValue_branchName'>[…]</span></div>
-                    <div class='tx12'><span id='benA_key2'>Địa chỉ : </span><span id='benAValue_address'>[…]</span></div>
-                    <div class='tx12'><span id='benA_key3'>Mã số doanh nghiệp : </span><span id='benAValue_businessCode'>[…]</span></div>
-                    <div class='tx12'><span id='benA_key4'>Điện thoại : </span><span id='benAValue_phoneNumber'>[…]</span></div>
-                    <div class='tx12'><span id='benA_key5'>Fax : </span><span id='benAValue_faxNumber'>[…]</span></div>
-                    <div class='tx12'><span id='benA_key6'>Đại diện : </span><span id='benAValue_representativeName'>[…]</span></div>
-                    <div class='tx12'><span id='benA_key7'>Chức vụ : </span><span id='benAValue_position'>[…]</span></div>
-                    <div class='tx12'>
-                        <span id='benA_key8'>Văn bản ủy quyền số : </span><span id='benAValue_authorizationDocumentNumber'>[…]</span>
-                        <span id='benA_key9'>ngày : </span><span id='benAValue_authorizationDocumentDate'>[…]</span>
-                        <span id='benA_key10'>của : </span><span id='benAValue_branchAuthorizationDocument'>[…]</span>
+                    <div id = "benA">
+                        <div class='txcenter tx12bold'><span id='header_key1'>HỢP ĐỒNG HẠN MỨC TÍN DỤNG</span></div>
+                        <div class='txcenter'><span id='header_key2'>Số: </span><span id='headerValue_numberHD'>[…]</span></div>
+                        <div><span id="header_key3" class='tx12'>Hôm nay, ngày </span> <span id="headerValue_dateHD">[…]</span><span
+                                id="header_key4">tháng</span> <span id='headerValue_monthHD'></span> <span id='header_key5'>năm</span> <span
+                                id='headerValue_yearHD'>[…]</span>, <span id='header_key6'>tại</span> <span id='headerValue_atPlace'>[…]</span><span id="header_key7">, chúng tôi gồm có:</span></div>
+                        <div class='tx12bold'><span id='benA_key1'>BÊN CẤP TÍN DỤNG: NGÂN HÀNG TMCP ĐẠI CHÚNG VIỆT NAM - </span><span
+                                id='benAValue_branchName'>[…]</span></div>
+                        <div class='tx12'><span id='benA_key2'>Địa chỉ : </span><span id='benAValue_address'>[…]</span></div>
+                        <div class='tx12'><span id='benA_key3'>Mã số doanh nghiệp : </span><span id='benAValue_businessCode'>[…]</span></div>
+                        <div class='tx12'><span id='benA_key4'>Điện thoại : </span><span id='benAValue_phoneNumber'>[…]</span></div>
+                        <div class='tx12'><span id='benA_key5'>Fax : </span><span id='benAValue_faxNumber'>[…]</span></div>
+                        <div class='tx12'><span id='benA_key6'>Đại diện : </span><span id='benAValue_representativeName'>[…]</span></div>
+                        <div class='tx12'><span id='benA_key7'>Chức vụ : </span><span id='benAValue_position'>[…]</span></div>
+                        <div class='tx12'>
+                            <span id='benA_key8'>Văn bản ủy quyền số : </span><span id='benAValue_authorizationDocumentNumber'>[…]</span>
+                            <span id='benA_key9'>ngày : </span><span id='benAValue_authorizationDocumentDate'>[…]</span>
+                            <span id='benA_key10'>của : </span><span id='benAValue_branchAuthorizationDocument'>[…]</span>
+                        </div>
+                        <div class='tx12 italic'><span id='benA_key11'>(Sau đây trong hợp đồng gọi tắt là </span><span id='benA_key12'
+                                class="bold">“Ngân Hàng”</span><span id='benA_key13'>)</span></div>
                     </div>
-                    <div class='tx12 italic'><span id='benA_key11'>(Sau đây trong hợp đồng gọi tắt là </span><span id='benA_key12'
-                            class="bold">“Ngân Hàng”</span><span id='benA_key13'>)</span></div>
                 
-                
-                
-                    <div class='tx12bold'><span id='benB_key1'>BÊN ĐƯỢC CẤP TÍN DỤNG:Công ty </span><span id='benBValue_companyName'>[…]</span>
+                    <div id = "benB">
+                        <div class='tx12bold'><span id='benB_key1'>BÊN ĐƯỢC CẤP TÍN DỤNG:Công ty </span><span id='benBValue_companyName'>[…]</span>
+                        </div>
+                        <div class='tx12'><span id='benB_key2'>Mã số doanh nghiệp:</span><span id='benBValue_businessCode'>[…]</span></div>
+                        <div class='tx12'><span id='benB_key3'>Trụ sở chính : </span><span id='benBValue_mainOffice'>[…]</span></div>
+                        <div class='tx12'><span id='benB_key4'>Fax:</span><span id='benBValue_faxNumber'>[…]</span></div>
+                        <div class='tx12'><span id='benB_key5'>Điện thoại : </span><span id='benBValue_phoneNumber'>[…]</span></div>
+                        <div class='tx12'><span id='benB_key6'>Email (nếu có) : </span><span id='benBValue_email'>[…]</span></div>
+                        <div class='tx12'><span id='benB_key7'>Đại diện : </span><span id='benBValue_representativeName'>[…]</span></div>
+                        <div class='tx12'><span id='benB_key8'>Chức vụ : </span><span id='benBValue_position'>[…]</span></div>
+                        <div class='tx12'><span id='benB_key9'>Văn bản ủy quyền số : </span><span
+                                id='benBValue_authorizationDocumentNumber'>[…]</span><span id='benB_key10'> ngày</span> <span
+                                id='benBValue_authorizationDocumentDate'>[…]</span><span id='benB_key11'> của </span><span
+                                id='benBValue_branchAuthorizationDocument'>[…]</span></div>
                     </div>
-                    <div class='tx12'><span id='benB_key2'>Mã số doanh nghiệp:</span><span id='benBValue_businessCode'>[…]</span></div>
-                    <div class='tx12'><span id='benB_key3'>Trụ sở chính : </span><span id='benBValue_mainOffice'>[…]</span></div>
-                    <div class='tx12'><span id='benB_key4'>Fax:</span><span id='benBValue_faxNumber'>[…]</span></div>
-                    <div class='tx12'><span id='benB_key5'>Điện thoại : </span><span id='benBValue_phoneNumber'>[…]</span></div>
-                    <div class='tx12'><span id='benB_key6'>Email (nếu có) : </span><span id='benBValue_email'>[…]</span></div>
-                    <div class='tx12'><span id='benB_key7'>Đại diện : </span><span id='benBValue_representativeName'>[…]</span></div>
-                    <div class='tx12'><span id='benB_key8'>Chức vụ : </span><span id='benBValue_position'>[…]</span></div>
-                    <div class='tx12'><span id='benB_key9'>Văn bản ủy quyền số : </span><span
-                            id='benBValue_authorizationDocumentNumber'>[…]</span><span id='benB_key10'> ngày</span> <span
-                            id='benBValue_authorizationDocumentDate'>[…]</span><span id='benB_key11'> của </span><span
-                            id='benBValue_branchAuthorizationDocument'>[…]</span></div>
-                
                 
                     <div class='tx12 italic'><span id='benB_key12'>(Sau đây trong Hợp Đồng gọi tắt là </span><span id='benB_key13'
                             class="bold">“Bên Được Cấp Tín Dụng”</span><span id='benB_key14'>)Các Bên thống nhất ký kết Hợp đồng Hạn mức tín dụng này (sau đây gọi tắt là </span><span id='benB_key15' class="bold">“Hợp Đồng”</span><span id='benB_key16'>) với các điều kiện và điều khoản sau:</span></div>
