@@ -108,3 +108,295 @@ a {
     padding-top: 27px;
 } */
 
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+/* @charset "utf-8"; */
+ul, ol
+{
+margin: 0;
+padding: 0;
+list-style: none;
+}
+a
+{
+color: #000;
+text-decoration: none;
+}
+span
+{
+ white-space: pre-wrap;
+}
+a:hover, a:active, a:focus
+{
+color: #888;
+text-decoration: none;
+}
+body
+{
+scroll-behavior: smooth;
+color: #000;
+		/* font-size: 14pt; */
+font-weight: normal;
+background: #f0f0f0;
+width: 100%;
+line-height: 20pt;
+text-align: justify;
+margin: 0 auto;
+}
+body, h1, h2, h3, h4, h5, h6, p, span
+{
+font-family:"Times New Roman";
+margin: 0;
+}
+
+/* body, h1, h2, h3, h4, h5, h6
+{
+	font-size: 14pt;
+} */
+
+.background-custom{
+background: #FFF;
+}
+.container{
+scroll-behavior: smooth;
+width: 210mm;
+padding: 25mm 20mm 25mm 35mm;
+background: #FFF ;
+margin: 0 auto;
+box-sizing: border-box;
+position: relative;
+font-size: 14pt;
+
+}
+.bold{
+font-weight: bold;
+}
+.italic{
+font-style: italic;
+}
+.tx12{
+font-size: 12pt ;
+font-weight: normal;
+white-space: normal !important;
+}
+.tx12bold{
+font-size: 12pt;
+font-weight: bold;
+}
+.tx12bolditalic{
+font-size: 12pt;
+font-weight: bold;
+font-style: italic;
+}
+.tx13{
+font-size: 13pt;
+font-weight: normal;
+}
+.tx13italic{
+font-size: 13pt;
+font-weight: normal;
+font-style: italic;
+}
+.tx13bold{
+font-size: 13pt;
+font-weight: bold;
+}
+.tx14bold{
+font-size: 14pt;
+font-weight: bold;
+}
+.txcenter{
+text-align: center;
+}
+.quochieu{
+float: right;
+width: 57%;
+}
+.coquan{
+float: left;
+width: 35%;
+}
+.line{
+border-bottom: 1px solid #000;
+width: 50mm;
+margin: 0 auto;
+}
+.title{
+width: 100%;
+text-align: center;
+float: left;
+margin-top: 10mm;
+}
+.title2{
+width: 100%;
+text-align: center;
+float: left;
+margin-top: 0;
+}
+.content{
+width: 100%;
+float: left;
+margin-top: 5mm;
+text-indent: 10mm;
+}
+.luutru{
+width: 50%;
+float: left;
+font-size: 11pt !important;
+line-height: 16pt;
+margin-top: 10mm;
+}
+.chidan{
+position: absolute;
+top: 10mm;
+right: 20mm;
+padding: 2mm 3mm;
+border: 1px solid #000;
+text-transform: uppercase;
+font-size: 13pt;
+font-weight: bold;
+}
+.chidan2 {
+padding: 2mm 3mm;
+border: 1px solid #000;
+font-size: 13pt;
+max-width: 230px;
+text-align: center;
+float: right;
+margin-top: -15mm;
+line-height: 14pt;
+margin-bottom: 2mm;
+}
+.txright{
+text-align: right;
+}
+.txleft{
+text-align: left;
+}
+.kiten{
+width: 40%;
+float: right;
+text-align: center;
+font-size: 14pt;
+margin-top: 10mm;
+}
+.footer1{
+position: absolute;
+bottom: 10mm;
+border-top: 1px solid #000;
+width: 155mm;
+font-style: italic;
+}
+table{
+border-left: 1px solid #000;
+border-bottom: 1px solid #000;
+text-indent: 0;
+}
+table td{
+border: 1px solid #000;
+border-left: none;
+border-bottom: none;
+padding: 1mm 1.5mm;
+}
+
+.bordered-container {
+display: inline-block;
+border: 1px solid #000;
+padding: 10px; /* Để thêm khoảng trắng bên trong */
+}
+
+.bordered {
+scroll-behavior: smooth;
+        /* border: 1px solid #000 !important; */
+padding: 10px; /* Khoảng cách giữa nội dung và border */
+margin: 10px; /* Khoảng cách giữa các border */
+}
+
+.title1Layout {
+    display: flex;
+}
+
+.title1Index {
+    flex-basis: 10%;
+}
+
+.title1Content {
+    flex-basis: 90%;
+}
+
+.title2Layout {
+    display: flex;
+}
+
+.title2Index {
+    flex-basis: 7%;
+}
+
+.title2Content {
+    flex-basis: 93%;
+}
+
+.title3Layout {
+    display: flex;
+}
+
+.title3Index {
+    flex-basis: 7%;
+}
+
+.title3Content {
+    flex-basis: 93%;
+}
+
+.title4Layout {
+    display: flex;
+}
+
+.title4Index {
+    flex-basis: 7%;
+}
+
+.title4Content {
+    flex-basis: 93%;
+}
+.kitenLayout{
+    display: flex; 
+}
+.kiten1{
+    flex-basis: 50%;
+}
+.kiten2{
+    flex-basis: 50%;
+}
+
+.tx9 {
+    font-size: 9pt;
+    font-weight: normal;
+    white-space: normal !important;
+}
+/* .w1-4{
+//	width:25%
+} */
+.w1-3{
+width:33.333333%
+}
+
+/* .grid-col-4{
+width:100%
+justify-content: space-between;
+display: flex;
+} */
+.space{
+background-color: black;
+}
+
+.warningChange input{
+border-color: #cdcdcd !important;
+outline: #cdcdcd !important;
+}
+
