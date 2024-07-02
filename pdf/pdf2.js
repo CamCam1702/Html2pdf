@@ -29,7 +29,7 @@ function getSelectedSpan() {
     console.log(selection.rangeCount);
     var range = selection.getRangeAt(0);
 
-    
+    FirstDad = findParentDivRecursive(range.startContainer);
     LastDad = findParentDivRecursive(range.endContainer);
 
     // console.log(FirstDad);
@@ -72,12 +72,14 @@ function getSelectedSpan() {
     startContainer.parentElement.removeChild(startContainer);
     endContainer.parentElement.removeChild(endContainer);
 
-    // console.log(FirstDad);
+    
+    // console.log(FirstDad.querySelectorAll('span'));
     // var fCheck = removeEmptySpans(FirstDad);
     // console.log('fCheck:', fCheck);
-    FirstDad = findParentDivRecursive(range.startContainer);
-    console.log(FirstDad.querySelectorAll('span'));
-    // appendClonedRangeFirst(FirstDad, spanElements);
+    // LastDad = findParentDivRecursive(clonedRange.endContainer);
+    console.log(LastDad);
+    console.log(LastDad.childNodes);
+    appendClonedRangeFirst(FirstDad, spanElements);
     // appendClonedRangeLast(LastDad, spanElements);   
 
 
@@ -108,20 +110,22 @@ function appendClonedRangeFirst(FirstDad, spanElements) {
 }
 
 function appendClonedRangeLast(LastDad, spanElements) {
-    console.log(LastDad.childNodes);
+    console.log(LastDad.childNodes.length);
+    var cnt = 0;
     LastDad.childNodes.forEach(spanElement => {
-        if (spanElement.nodeType === Node.ELEMENT_NODE && spanElement.nodeName === 'SPAN' && !spanElement.classList.contains(highlightCls)) {        
-
-            var newSpan = document.createElement('span');
-            newSpan.textContent = spanElement.textContent;
-
-            if (spanElement.id) {
-                newSpan.id = spanElement.id;
-            }
-
-            spanElements[spanElements.length - 1].parentElement.appendChild(newSpan);
-        }
+        // if (spanElement.nodeType === Node.ELEMENT_NODE && spanElement.nodeName === 'SPAN' && !spanElement.classList.contains(highlightCls)) {
+        //     console.log(spanElement);
+        //     var newSpan = document.createElement('span');
+        //     newSpan.textContent = spanElement.textContent;
+        //     if (spanElement.id) {
+        //         newSpan.id = spanElement.id;
+        //     }
+        //     spanElements[spanElements.length - 1].parentElement.appendChild(newSpan);
+        // }
+        console.log(spanElement);
+        cnt ++;
     });
+    console.log('cnt:', cnt);
 
     // LastDad.parentElement.removeChild(LastDad);
 }
