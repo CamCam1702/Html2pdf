@@ -8,8 +8,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="pdf.css" />
-    <script src="pdf.js"></script>
+    <script src="pdf2.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <head>
+        …
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+        <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+      </head>
 
 
 <style>
@@ -34,6 +39,10 @@
 .highlight {
         background-color: yellow;
     }
+
+.bold{
+    font-weight: bold;
+}
 
 .col-md-12{
     padding: 1rem; 
@@ -430,6 +439,7 @@ outline: #cdcdcd !important;
 </head>
 
 <body>
+    <trix-editor></trix-editor>
     <div class="container d-flex justify-content-center mt-50 mb-50">
         <div class="row">
             <table class="table table-striped">
@@ -493,7 +503,7 @@ outline: #cdcdcd !important;
             </tbody>
                 </table>
             <div class="col-md-12 text-right mb-3">
-                <button class="btn btn-primary" id="download"> download pdf</button>
+                <button class="btn btn-primary" id="check2"> download pdf</button>
             </div>
             <div>
                 <button class="btn btn-primary" id="check"> print</button>
