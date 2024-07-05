@@ -1,5 +1,14 @@
+window.onload = function () {
+        document.getElementById('highlight').addEventListener("click", function(){
+        console.log("hightlight clicked");
+    });
+}
+
 function getSelectedSpan(mode) {
     var selection = window.getSelection();
+    if (selection.rangeCount === 0) {
+        return;
+    }
     var range = selection.getRangeAt(0);
 
     console.log(range);

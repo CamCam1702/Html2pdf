@@ -91,18 +91,27 @@ a {
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #2196f3
+    color: yellow;
 }
 
-.btn-labeled>b {
+.state-on {
+    color: red;
+}
+
+.state-off {
+    background-color: red;
+    color: white;
+}
+
+
+/* .btn-labeled>b {
     position: absolute;
     top: -1px;
     background-color: blue;
     display: block;
     line-height: 1;
     padding: .62503rem
-}
+} */
 
 /* .title1Layout{
     padding-top: 27px;
