@@ -399,4 +399,36 @@ background-color: black;
 border-color: #cdcdcd !important;
 outline: #cdcdcd !important;
 }
+.header-info{position:static;position:static;top:8px;z-index:9;display:flex;width: max-content;left:100vw;}
 
+.nav-action {
+    position:fixed;
+    left:90px;
+}
+
+.nav-action-highlight {
+    position:fixed;
+    left:50px;
+}
+
+.nav-action-bold {
+    position:fixed;
+    left:90px;
+}
+
+.nav-action-italic {
+    position:fixed;
+    left:130px;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.highlight{
+    background-color:yellow;
+}
+
+.italic{
+    font-style: italic;
+}
