@@ -18,6 +18,10 @@ body {
     margin-top: 50px;
 }
 
+.mr-50 {
+    margin-right: 50px;
+}
+
 .mb-50 {
     margin-bottom: 50px;
 }
@@ -91,11 +95,12 @@ a {
 }
 
 .btn-primary {
-    color: yellow;
+    color: white;
 }
 
 .state-on {
-    color: red;
+    color: white;
+    background-color: #007bff;
 }
 
 .state-off {
@@ -122,7 +127,9 @@ a {
     margin-bottom: 20px;
 }
 
-
+/* .row{
+    margin-right: 100px;
+} */
 
 /* @charset "utf-8"; */
 ul, ol
@@ -408,6 +415,9 @@ background-color: black;
 border-color: #cdcdcd !important;
 outline: #cdcdcd !important;
 }
+
+
+/* từ chỗ này */
 .header-info{position:static;position:static;top:8px;z-index:9;display:flex;width: max-content;left:100vw;}
 
 .nav-action {
@@ -427,7 +437,20 @@ outline: #cdcdcd !important;
 
 .nav-action-italic {
     position:fixed;
-    left:130px;
+    left:100px;
+    top: 80px;
+}
+.nav-action-comment {
+    position:fixed;
+    top: 80px;
+    left:50px;
+}
+
+.nav-action-comment-box{
+    position:fixed;
+    top: 100px;
+    left: -500px;
+    /* z-index: ; */
 }
 
 .bold{
@@ -440,4 +463,157 @@ outline: #cdcdcd !important;
 
 .italic{
     font-style: italic;
+}
+
+.container-comment{
+    scroll-behavior: smooth;
+    width: 210mm;
+    padding: 25px 20px 25px 20px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    position: relative;
+    font-size: 14pt;
+}
+
+
+.comment-box {
+    width: 300px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 10);
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 20px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-author {
+    font-weight: bold;
+}
+
+.comment-content {
+    margin-bottom: 10px;
+}
+
+.comment-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.comment-actions {
+    display: flex;
+}
+
+
+
+.comment-textarea {
+    background: #fff;
+    border: 1px solid #747775;
+    border-radius: 18px;
+    color: #1f1f1f;
+    font-family: Google Sans, Roboto, sans-serif;
+    padding: 20px 7px 8px 16px;  
+    line-height: 14px;
+    height: 55px;
+    box-sizing: border-box;
+    font-size: 14px;
+    display: block;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    outline-width: 0 !important;
+    resize: none;
+    width: 95%;
+    cursor: text;
+    text-align: start;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+
+
+.comment-cancel-docs {
+    border-radius: 100px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: Google Sans, Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    color: #0b57d0;
+    padding: 9px 12px;
+    /* background: transparent; */
+    border: 1px solid transparent !important;
+    height: 36px;
+    line-height: 18px;
+}
+
+.comment-delete-docs:hover {
+    color: #0b57d0;
+    padding: 9px 12px;
+    background-color: rgba(11, 87, 208, .08);
+}
+
+.comment-delete-docs {
+    border-radius: 100px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: Google Sans, Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    color: #0b57d0;
+    padding: 9px 12px;
+    /* background: transparent; */
+    border: 1px solid transparent !important;
+    height: 36px;
+    line-height: 18px;
+}
+
+.comment-cancel-docs:hover {
+    color: #0b57d0;
+    padding: 9px 12px;
+    background-color: rgba(11, 87, 208, .08);
+}
+
+.comment-submit {
+    font-family: Google Sans, Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    border-radius: 100px;
+    box-sizing: border-box;
+    border: none;
+}
+
+.comment-submit-disabled {
+    height: 36px;
+    line-height: 16px;
+    padding: 9px 16px;
+    background: #e4e4e4;
+    color: #1f1f1f;
+    cursor: default;
+}
+
+.comment-submit-enable {
+    border: 1px solid transparent;
+    border-radius: 100px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: Google Sans, Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    height: 36px;
+    line-height: 16px;
+    padding: 9px 16px;
+    background: #0b57d0;
+    color: #fff;
 }
