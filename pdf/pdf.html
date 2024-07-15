@@ -21,9 +21,6 @@
         <div class="container d-flex justify-content-center mt-50 mb-50">
             <div class="">
                 <div>
-                    <!-- <button class="state-on btn  nav-action-highlight fa fa-droplet" id="highlight"></button>
-                    <button class="btn-primary btn  nav-action-bold fa fa-bold" id="bold"></button>
-                    <button class="btn-primary btn  nav-action-italic fa fa-italic" id="italic"></button> -->
                     <button class="btn-primary btn  nav-action-comment fa fa-comments" id="comment"></button>
                 </div>
                 <div class="col nav-action-comment-box" id="comment-list">
@@ -38,10 +35,21 @@
                             <p>Comment or add others with @</p>
                         </div>
                         <div class="comment-footer">
-                            <div class="">
+                                <button class="comment-delete-docs">Delete</button>
                                 <button class="comment-cancel-docs">Cancel</button>
-                                <button class="comment-submit comment-submit-disabled" id="submit">Comment</button>
+                                <button class="comment-submit comment-submit-disabled">Comment</button>
+                        </div>
+                        <div class = "reply-header">
+                            <div class="reply-author">
+                                <span>Lý Công Thành</span>
                             </div>
+                        </div>
+                        <div class="reply-content">
+                            <textarea id="reply-text" rows="2" class="comment-textarea" placeholder="Write a reply..."></textarea>
+                        </div>
+                        <div class="reply-footer">
+                            <button class="comment-cancel-docs">Cancel</button>
+                            <button class="comment-submit comment-submit-disabled">Reply</button>
                         </div>
                     </div>
                 </div>
@@ -55,7 +63,7 @@
                                     id='headerValue_yearHD'>[…]</span>, <span id='header_key6'>tại</span> <span id='headerValue_atPlace'>[…]</span><span id="header_key7">, chúng tôi gồm có:</span></div>
                             <div class='tx12bold'><span id='benA_key1'>BÊN CẤP TÍN DỤNG: NGÂN HÀNG TMCP ĐẠI CHÚNG VIỆT NAM - </span><span
                                     id='benAValue_branchName'>[…]</span></div>
-                            <div class='tx12'><span id='benA_key2' class = "highlight comment-box-1 comment-box-3">Địa chỉ : </span><span id='benAValue_address'><span class = "highlight comment-box-1 comment-box-3">Hoàng</span> mai</span></div>
+                            <div class='tx12'><span id='benA_key2' class = "highlight comment-box-1">Địa chỉ : </span><span id='benAValue_address'><span class = "highlight comment-box-1">Hoàng</span> mai</span></div>
                             <div class='tx12'><span id='benA_key3'>Mã số doanh nghiệp : </span><span id='benAValue_businessCode'>[…]</span></div>
                             <div class='tx12'><span class = "highlight comment-box-2" id='benA_key4'>Điện thoại : </span><span id='benAValue_phoneNumber'>[…]</span></div>
                             <div class='tx12'><span id='benA_key5'>Fax : </span><span id='benAValue_faxNumber'>[…]</span></div>
@@ -420,6 +428,9 @@
                 </div>
             </div>
         </div> -->
+    </div>
+    <div id="comment-data" style="display: none;">[{"id":"comment-box-1","comment":"Sửa lại căn lề đi","name":"Lý Công Thành","pID":null},{"id":"comment-box-2","comment":"Đổi điện thoại thành phone","name":"Nguyễn Hoàng Long","pID":null},{"id":"comment-box-3","comment":"Đừng sửa chỗ này","name":"Lưu Thị Lâm Oanh","pID":"comment-box-1"}]
+        
     </div>
     
 </body>
