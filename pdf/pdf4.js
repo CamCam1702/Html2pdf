@@ -18,70 +18,13 @@ var isDown = false;
 var isDragging = false;
 
 var newWord;
-var range;
-var selection;
-var cnt = 0;
-var sOffset = 0;
-let isProcessing = false;
+var new_range = new Range();
 
-document.addEventListener('mouseup', function() {
+var doc;
+
+
+document.addEventListener('mouseup', function(){
     isDown = false;
-    if(newWord && newWord.textContent === '') {
-        newWord.parentNode.removeChild(newWord);
-        newWord = null;
-    }else{
-        newWord = null;
-    }
-    // if(newWord && newWord.textContent === '\u200B') {
-    //     newWord.parentNode.removeChild(newWord);
-    //     newWord = null;
-    // }
-    // var selection = window.getSelection();
-    // newWord = SpanCreate(window.getSelection().getRangeAt(0));
-    // newWord.classList.add('highlight');
-    // newWord.innerHTML = '&#8203;';
-    // var new_range = new Range();
-    // new_range.selectNode(newWord);
-    // selection.removeAllRanges();
-    // selection.addRange(new_range);
-    selection = window.getSelection();
-    range = selection.getRangeAt(0);
-    sOffset = range.startOffset;
-}, true);
-
-document.addEventListener('keydown', function(event) {
-    // selection = window.getSelection();
-    // if (selection.rangeCount > 0) {
-    //     range = selection.getRangeAt(0);
-    // }
-});
-
-document.addEventListener('keyup', function(event) {
-    if (isProcessing) return;
-    isProcessing = true;
-
-    if (newWord && newWord.textContent.trim() === '') {
-        newWord.parentNode.removeChild(newWord);
-        newWord = null;
-    }
-
-    if (event.key !== 'Backspace' && !newWord && window.getSelection().rangeCount > 0) {
-        let newRange = new Range();
-        newRange.setStart(range.startContainer, range.startOffset);
-        newRange.setEnd(range.endContainer, range.endOffset + 1);
-        
-        newWord = SpanCreate(newRange);
-        newWord.classList.add('highlight');
-        
-        selection.removeAllRanges();
-        let lastRange = new Range();
-        lastRange.selectNodeContents(newWord);
-        lastRange.collapse(false);
-        selection.addRange(lastRange);
-    }
-
-    isProcessing = false;
-    console.log(range.startOffset);
 });
 
 document.addEventListener('mousemove', function(event) {
@@ -99,7 +42,7 @@ document.addEventListener('mousemove', function(event) {
 }, true);
 
 document.addEventListener('DOMContentLoaded', () => {
-    var doc = document.getElementById('allvoice');
+    doc = document.getElementById('allvoice');
     doc.contentEditable = true;
     commentsContainer = document.getElementById("comment-list");
     btn_comment = document.getElementById("comment");
@@ -107,56 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(commentsArray);
 
     findAndAddEventListeners();
-
-    function createCommentBox(id, content, name) {
-        const commentItem = document.createElement('div');
-        commentItem.className = 'comment-box';
-        commentItem.id = `comment-container-${id}`;
-
-        commentItem.innerHTML = `
-            <div class="comment-header">
-                <div class="comment-author">
-                    <span id="comment-name-${id}">${name || 'Anonymous'}</span>
-                </div>
-            </div>
-            <div class="comment-content">
-                <textarea id="comment-text-${id}" rows="5" class="comment-textarea">${content}</textarea>
-                <p>Comment or add others with @</p>
-            </div>
-            <div class="comment-footer">
-                <div class="">
-                    <button class="comment-delete-docs" id="delete-${id}" title="Delete">Delete</button>
-                    <button class="comment-cancel-docs" title="Cancel">Cancel</button>
-                    <button class="comment-submit comment-submit-enable" id="submit-${id} title="Submit"">Comment</button>
-                </div>
-            </div>
-        `;
-        commentsContainer.appendChild(commentItem);
-        const deleteButton = document.querySelector(`#delete-${id}`);
-    }
-
-    function addMulCommentDB(comment = []) {
-        const existingCommentBox = document.querySelector('.comment-box');
-        if (existingCommentBox) {
-            commentsContainer.removeChild(existingCommentBox);
-        }
-        commentIdCounter++;  // Tăng giá trị biến đếm mỗi khi tạo comment box
-        id = `comment-box-${commentIdCounter}`;  // Tạo ID duy nhất
-        content = '';
-
-        for (let i = 0; i < comment.length; i++) {
-            if (comment[i].active) {
-                id = comment[i].id;
-                console.log(comment[i].id);
-                createCommentBox(comment[i].id, comment[i].comment, comment[i].name);
-                break;
-            }
-        }
-        const commentBox = document.querySelector(`#comment-container-${id}`);
-        console.log(comment[1].id);
-        createSubComment(commentBox, comment[1].id, comment[1].comment, comment[1].name)
-
-    }
     btn_comment.addEventListener('click', () => {
         var selection = window.getSelection();
         if (selection.rangeCount > 0) {
@@ -164,7 +57,64 @@ document.addEventListener('DOMContentLoaded', () => {
             addComment(null, null, null, range);
         }
     });
+
+
+    //thêm mới thì đổi màu
+    doc.addEventListener('mouseup', function() {
+        if(newWord && newWord.textContent === '\u200B') {
+            newWord.parentNode.removeChild(newWord);
+            newWord = null;
+        }
+        var selection = window.getSelection();
+        var range = selection.getRangeAt(0);
+        if(range.collapsed){
+            newWord = SpanCreate(range);
+            newWord.classList.add('highlight');
+            newWord.innerHTML = '&#8203;';
+            range.collapse(false);
+            new_range = range;
+            var range_sub = new Range();
+            range_sub.setStartBefore(newWord);
+            range_sub.setEndBefore(newWord);
+            selection.removeAllRanges();
+            selection.addRange(range_sub);
+        }
+        
+    }, true);
+    
+    doc.addEventListener('keydown', function(event) {
+        var selection = window.getSelection();
+        var range = selection.getRangeAt(0);
+    
+        const specialKeys = [ 'Alt', 'Shift', 'Control', 'Meta'];
+        if (specialKeys.includes(event.key) || !selection.isCollapsed) {
+            return;
+        }
+
+        //tạo lại newword nếu người dùng xoá
+        if(event.key == 'Backspace'){
+            if(newWord.textContent == '\u200B') {
+                newWord.parentNode.removeChild(newWord);
+                newWord = SpanCreate(range);
+                newWord.classList.add('highlight');
+                newWord.innerHTML = '&#8203;';
+                range.collapse(false);
+                new_range = range;
+                var range_sub = new Range();
+                range_sub.setStartBefore(newWord);
+                range_sub.setEndBefore(newWord);
+                selection.removeAllRanges();
+                selection.addRange(range_sub);
+            }
+            return;
+        }
+    
+        selection.removeAllRanges();
+        selection.addRange(new_range);
+    });
 });
+
+
 
 function createReply(commentElement, id, content, name) {
     const replyContainer = document.createElement('div');
