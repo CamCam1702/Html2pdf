@@ -22,6 +22,7 @@ var range;
 var selection;
 var cnt = 0;
 var sOffset = 0;
+let isProcessing = false;
 
 document.addEventListener('mouseup', function() {
     isDown = false;
@@ -50,30 +51,37 @@ document.addEventListener('mouseup', function() {
 
 document.addEventListener('keydown', function(event) {
     // selection = window.getSelection();
-    // range = selection.getRangeAt(0);
-    // sOffset = range.startOffset;
+    // if (selection.rangeCount > 0) {
+    //     range = selection.getRangeAt(0);
+    // }
 });
 
 document.addEventListener('keyup', function(event) {
-    console.log(sOffset);
-    if(newWord && newWord.textContent.trim() == ''){
-        // newWord.parentNode.removeChild(newWord);
-        // newWord = null;
+    if (isProcessing) return;
+    isProcessing = true;
+
+    if (newWord && newWord.textContent.trim() === '') {
+        newWord.parentNode.removeChild(newWord);
+        newWord = null;
     }
-    if (event.key !== 'Backspace' && !newWord && window.getSelection().rangeCount>0) {
-        var new_range = new Range();
-        new_range.setStart(range.startContainer, range.startOffset);
-        new_range.setEnd(range.endContainer, range.endOffset+1);
-        newWord = SpanCreate(new_range);
+
+    if (event.key !== 'Backspace' && !newWord && window.getSelection().rangeCount > 0) {
+        let newRange = new Range();
+        newRange.setStart(range.startContainer, range.startOffset);
+        newRange.setEnd(range.endContainer, range.endOffset + 1);
+        
+        newWord = SpanCreate(newRange);
         newWord.classList.add('highlight');
+        
         selection.removeAllRanges();
-        var lastRange = new Range();
+        let lastRange = new Range();
         lastRange.selectNodeContents(newWord);
         lastRange.collapse(false);
-        console.log(lastRange);
         selection.addRange(lastRange);
     }
-    // console.log(range.startOffset);
+
+    isProcessing = false;
+    console.log(range.startOffset);
 });
 
 document.addEventListener('mousemove', function(event) {
