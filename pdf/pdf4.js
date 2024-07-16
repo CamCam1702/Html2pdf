@@ -15,20 +15,75 @@ var mousePosition;
 var offset = [0,0];
 var div;
 var isDown = false;
+var isDragging = false;
+
+var newWord;
+var range;
+var selection;
+var cnt = 0;
+var sOffset = 0;
 
 document.addEventListener('mouseup', function() {
     isDown = false;
+    if(newWord && newWord.textContent === '') {
+        newWord.parentNode.removeChild(newWord);
+        newWord = null;
+    }else{
+        newWord = null;
+    }
+    // if(newWord && newWord.textContent === '\u200B') {
+    //     newWord.parentNode.removeChild(newWord);
+    //     newWord = null;
+    // }
+    // var selection = window.getSelection();
+    // newWord = SpanCreate(window.getSelection().getRangeAt(0));
+    // newWord.classList.add('highlight');
+    // newWord.innerHTML = '&#8203;';
+    // var new_range = new Range();
+    // new_range.selectNode(newWord);
+    // selection.removeAllRanges();
+    // selection.addRange(new_range);
+    selection = window.getSelection();
+    range = selection.getRangeAt(0);
+    sOffset = range.startOffset;
 }, true);
+
+document.addEventListener('keydown', function(event) {
+    // selection = window.getSelection();
+    // range = selection.getRangeAt(0);
+    // sOffset = range.startOffset;
+});
+
+document.addEventListener('keyup', function(event) {
+    console.log(sOffset);
+    if(newWord && newWord.textContent.trim() == ''){
+        // newWord.parentNode.removeChild(newWord);
+        // newWord = null;
+    }
+    if (event.key !== 'Backspace' && !newWord && window.getSelection().rangeCount>0) {
+        var new_range = new Range();
+        new_range.setStart(range.startContainer, range.startOffset);
+        new_range.setEnd(range.endContainer, range.endOffset+1);
+        newWord = SpanCreate(new_range);
+        newWord.classList.add('highlight');
+        selection.removeAllRanges();
+        var lastRange = new Range();
+        lastRange.selectNodeContents(newWord);
+        lastRange.collapse(false);
+        console.log(lastRange);
+        selection.addRange(lastRange);
+    }
+    // console.log(range.startOffset);
+});
 
 document.addEventListener('mousemove', function(event) {
     var div = document.querySelector('.comment-box');
     event.preventDefault();
     if (isDown) {
+        isDragging = true;
         mousePosition = {
-
             x : event.clientX,
             y : event.clientY
-
         };
         div.style.left = (mousePosition.x + offset[0]) + 'px';
         div.style.top  = (mousePosition.y + offset[1]) + 'px';
@@ -36,6 +91,8 @@ document.addEventListener('mousemove', function(event) {
 }, true);
 
 document.addEventListener('DOMContentLoaded', () => {
+    var doc = document.getElementById('allvoice');
+    doc.contentEditable = true;
     commentsContainer = document.getElementById("comment-list");
     btn_comment = document.getElementById("comment");
     var commentIdCounter = 3; // cách sửa tạm thời
@@ -164,7 +221,14 @@ function addCommentDB(id = null, content = '', name = '') {
             </div>
         `;
     commentsContainer.appendChild(commentItem);
+    commentItem.addEventListener('click', () => {
+        if (!isDragging) {
+            console.log("Comment");
+        document.getElementsByClassName(id)[0].scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+        }
+    });
     commentItem.addEventListener('mousedown', function(e) {
+        isDragging = false;
         isDown = true;
         offset = [
             commentItem.offsetLeft - e.clientX,
@@ -202,6 +266,7 @@ function addCommentDB(id = null, content = '', name = '') {
     });
 
     cancelButton.addEventListener('click', () => {
+        event.stopPropagation();
         commentsContainer.removeChild(commentItem);
         removeAllFocusClasses();
     });
@@ -229,6 +294,7 @@ function addCommentDB(id = null, content = '', name = '') {
 
     //xoá: 
     deleteButton.addEventListener('click', () => {
+        event.stopPropagation();
         const elements = document.querySelectorAll(`.${id}`);
         elements.forEach(element => {
             var textNode = document.createTextNode(element.textContent);
@@ -239,6 +305,10 @@ function addCommentDB(id = null, content = '', name = '') {
         const commentIndex = commentsArray.findIndex(c => c.id === id);
         if (commentIndex !== -1) {
             commentsArray.splice(commentIndex, 1);
+        }
+        const replyIndex = commentsArray.findIndex(c => c.pID === id);
+        if (replyIndex !== -1) {
+            commentsArray.splice(replyIndex, 1);
         }
         removeAllFocusClasses();
     });
